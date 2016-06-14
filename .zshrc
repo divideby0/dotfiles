@@ -48,11 +48,9 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rails bower boot2docker coffee docker git-flow github gradle grails lein node npm osx python redis-cli screen sublime sudo vagrant)
-
+plugins=(git ruby rails bower coffee docker git-flow github gradle grails lein node npm osx python redis-cli screen sublime sudo vagrant)
 
 source $ZSH/oh-my-zsh.sh
-
 
 # User configuration
 
@@ -63,22 +61,19 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nano'
+else
+  export EDITOR='nano'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 source /opt/boxen/env.sh
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/cedric/.gvm/bin/gvm-init.sh" ]] && source "/Users/cedric/.gvm/bin/gvm-init.sh"
 
 function setjdk() {
   if [ $# -ne 0 ]; then
@@ -95,11 +90,7 @@ function setjdk() {
  }
 setjdk 1.8
 
-function export_boot2docker() {
-	export DOCKER_HOST="tcp://$(boot2docker ip 2>/dev/null):2376"
-    export DOCKER_CERT_PATH="/Users/$(whoami)/.boot2docker/certs/boot2docker-vm"
-    export DOCKER_TLS_VERIFY=1
-}
-export_boot2docker
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+export SDKMAN_DIR="/Users/cedric/.sdkman"
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"

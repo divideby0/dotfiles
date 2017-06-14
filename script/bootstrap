@@ -81,7 +81,7 @@ install_dotfiles () {
 }
 
 echo ''
-generate_gitconfig
+# generate_gitconfig
 install_dotfiles
 echo ''
 echo '  Installed!'

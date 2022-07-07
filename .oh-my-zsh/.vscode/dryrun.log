@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/cedric/.oh-my-zsh'
+make: Leaving directory `/Users/cedric/.oh-my-zsh'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

@@ -58,7 +58,6 @@ plugins=(
   rsync
   sudo
   yarn
-  zsh-lerna
 )
 
 source $ZSH/oh-my-zsh.sh

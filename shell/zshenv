@@ -1,0 +1,5 @@
+# zshenv - loaded for all shell types (interactive, login, scripts)
+# Keep this minimal - only environment variables needed everywhere
+
+# uv/ruff and other tools installed to ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"

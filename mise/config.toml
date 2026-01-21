@@ -1,0 +1,13 @@
+# mise global configuration
+# This file goes in ~/.config/mise/config.toml
+# See: https://mise.jdx.dev/configuration.html
+
+[settings]
+# Use shims for better shell startup performance
+experimental = true
+
+# Don't auto-install tools (manual control)
+auto_install = false
+
+# Trust all config files by default (set to false for stricter security)
+trusted_config_paths = ["~"]

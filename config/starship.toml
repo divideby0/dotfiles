@@ -1,0 +1,107 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[\uE0B6](#7B1FA2)\
+$username\
+[\uE0B0](bg:#C62828 fg:#7B1FA2)\
+$directory\
+[\uE0B0](fg:#C62828 bg:#EF6C00)\
+$git_branch\
+$git_status\
+[\uE0B0](fg:#EF6C00 bg:#0277BD)\
+$kubernetes\
+[\uE0B0](fg:#0277BD bg:#004D40)\
+$docker_context\
+[\uE0B0](fg:#004D40 bg:#263238)\
+$time\
+[\uE0B0 ](fg:#263238)\
+$line_break\
+$character
+"""
+
+[username]
+show_always = true
+style_user = "bg:#7B1FA2 fg:#FFFFFF bold"
+style_root = "bg:#7B1FA2 fg:#FFFF00 bold"
+format = '[ $user ]($style)'
+disabled = false
+
+[directory]
+style = "bg:#C62828 fg:#FFFFFF bold"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = ".../"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#EF6C00 fg:#FFFFFF bold"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#EF6C00 fg:#FFFFFF"
+format = '[$all_status$ahead_behind ]($style)'
+
+[gcloud]
+style = "bg:#0277BD fg:#FFFFFF bold"
+format = '[  $project ]($style)'
+disabled = false
+
+[kubernetes]
+disabled = false
+style = "bg:#0277BD fg:#FFFFFF bold"
+format = '[ ⎈ $context ]($style)'
+
+[[kubernetes.contexts]]
+context_pattern = 'gke_.*_(?P<cluster>[\w-]+)$'
+context_alias = 'gke-$cluster'
+
+[nodejs]
+symbol = ""
+style = "bg:#00695C fg:#FFFFFF"
+format = '[ $symbol ($version) ]($style)'
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+[python]
+symbol = ""
+style = "bg:#00695C fg:#FFFFFF"
+format = '[ $symbol ($version) ]($style)'
+detect_extensions = ["py"]
+detect_files = [".python-version", "requirements.txt", "pyproject.toml", "Pipfile", "setup.py"]
+detect_folders = [".venv", "venv"]
+
+[rust]
+symbol = ""
+style = "bg:#00695C fg:#FFFFFF"
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#00695C fg:#FFFFFF"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = ""
+style = "bg:#00695C fg:#FFFFFF"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:#004D40 fg:#FFFFFF bold"
+format = '[ $symbol $context ]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#263238 fg:#FFFFFF bold"
+format = '[  $time ]($style)'
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'

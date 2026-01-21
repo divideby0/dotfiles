@@ -1,15 +1,5 @@
-# Compiled Python files
-*.pyc
-
-# Folder view configuration files
 .DS_Store
-Desktop.ini
+*.local
 
-# Thumbnail cache files
-._*
-Thumbs.db
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
-.oh-my-zsh
+# Claude Code settings (contains API keys in MCP env vars)
+.claude/

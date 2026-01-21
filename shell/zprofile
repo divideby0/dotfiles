@@ -1,0 +1,5 @@
+# zprofile - loaded for login shells only (before zshrc)
+# This is where Homebrew and other system-wide PATH setup belongs
+
+# Homebrew (Apple Silicon path)
+eval "$(/opt/homebrew/bin/brew shellenv)"

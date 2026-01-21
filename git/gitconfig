@@ -1,0 +1,84 @@
+# Git configuration
+# Note: Set your user.name and user.email via:
+#   git config --global user.name "Your Name"
+#   git config --global user.email "your@email.com"
+# Or create ~/.gitconfig.local with [user] section
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nano
+    excludesfile = ~/.gitignore_global
+    # Memory settings for large repos
+    packedGitLimit = 512m
+    packedGitWindowSize = 512m
+
+[http]
+    postBuffer = 524288000
+
+[pack]
+    deltaCacheSize = 512m
+    packSizeLimit = 512m
+    windowMemory = 512m
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[pull]
+    rebase = false
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[diff]
+    renames = copies
+    colorMoved = default
+
+[merge]
+    conflictstyle = diff3
+    log = true
+
+[rerere]
+    enabled = true
+
+[color]
+    ui = auto
+
+[alias]
+    # Status and log
+    s = status -s
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # Branches
+    co = checkout
+    br = branch
+    branches = branch -a
+    remotes = remote -v
+
+    # Diffs
+    d = diff
+    dc = diff --cached
+    ds = diff --stat
+
+    # Commits
+    ci = commit
+    amend = commit --amend --reuse-message=HEAD
+    undo = reset HEAD~1 --mixed
+
+    # Find
+    fb = "!f() { git branch -a --contains $1; }; f"
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h %Cblue%ad %Creset%s' --decorate --date=short -S$1; }; f"
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h %Cblue%ad %Creset%s' --decorate --date=short --grep=$1; }; f"
+
+    # Cleanup
+    cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d"
+
+# Include local config (for user info, work-specific settings)
+[include]
+    path = ~/.gitconfig.local

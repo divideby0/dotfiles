@@ -1,0 +1,177 @@
+# Terminal and Oh My Zsh settings
+export TERM="xterm-256color"
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""
+
+# Performance optimizations
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_COMPFIX="true"
+
+# Plugins - trimmed for performance
+# Removed: docker, docker-compose, npm, yarn, pip, poetry (just aliases)
+# Removed: flutter, gradle, nmap (rarely used completions)
+# Removed: git-extras (heavy, overlaps with git)
+# Removed: dotenv (causes delay on every cd - source manually when needed)
+plugins=(
+  brew
+  colored-man-pages
+  common-aliases
+  git
+  gnu-utils
+  history-substring-search
+  last-working-dir
+  pj
+  sudo
+)
+
+# Custom plugins
+plugins+=(
+  custom-set-path
+)
+
+# Oh My Zsh handles compinit - these settings speed it up
+export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+export ZSH_DISABLE_COMPFIX="true"
+
+source $ZSH/oh-my-zsh.sh
+
+# mise - version manager (using shims for faster startup, no per-prompt hook)
+eval "$(mise activate zsh --shims)"
+
+# Google Cloud SDK completion (lazy load)
+_gcloud_completion_loaded=0
+_load_gcloud_completion() {
+  if [[ $_gcloud_completion_loaded -eq 0 ]]; then
+    source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc 2>/dev/null
+    _gcloud_completion_loaded=1
+  fi
+}
+gcloud() { _load_gcloud_completion; command gcloud "$@" }
+
+# History settings (security + deduplication)
+HISTSIZE=100000
+SAVEHIST=100000
+setopt HIST_IGNORE_SPACE        # Prefix sensitive commands with space to exclude
+setopt HIST_IGNORE_DUPS         # Don't record duplicate of previous event
+setopt HIST_FIND_NO_DUPS        # Don't display previously found duplicate
+setopt SHARE_HISTORY            # Share history between all sessions
+
+# PATH deduplication
+typeset -U PATH
+
+# Preferred editor for local and remote sessions
+export EDITOR=$([[ -n $SSH_CONNECTION ]] && echo 'nano' || echo 'cursor')
+
+# Architecture flag
+export ARCHFLAGS="-arch arm64"
+
+# Kubernetes config
+export KUBECONFIG="$HOME/.kube/config"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+# iTerm2 shell integration
+[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# =============================================================================
+# Aliases
+# =============================================================================
+
+# Utility functions
+kill-port() {
+  local pids=$(lsof -t -i :"$1" 2>/dev/null)
+  if [[ -n "$pids" ]]; then
+    echo "$pids" | xargs kill -9
+    echo "Killed process(es) on port $1"
+  else
+    echo "No process found on port $1"
+  fi
+}
+
+# Core aliases
+alias kp='kill-port'
+alias ls="ls -g"
+alias zshconfig="$EDITOR ~/.zshrc"
+
+# Build tools
+alias mk='/usr/bin/find . -maxdepth 2 -name Makefile -exec make -C {} \;'
+
+# Nx monorepo shortcuts
+alias nnx="npx nx"
+alias nxm="npx nx run-many -t"
+alias nxr="npx nx run"
+alias pnx="pnpm nx"
+alias pnxr="pnpm nx run"
+alias pnxm="pnpm nx run-many -t"
+
+# Go packages bin (for tools installed via `go install`)
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# qlty
+export QLTY_INSTALL="$HOME/.qlty"
+export PATH="$QLTY_INSTALL/bin:$PATH"
+
+# =============================================================================
+# Lazy-loaded completions (only loaded on first tab-complete, not at startup)
+# =============================================================================
+_comp_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-completions"
+[[ -d "$_comp_cache" ]] || mkdir -p "$_comp_cache"
+
+# Define lazy completion loader
+_lazy_load_completion() {
+  local cmd=$1
+  local cache_file="$_comp_cache/_$cmd"
+
+  # Unset the stub function
+  unfunction "$cmd" 2>/dev/null
+
+  # Generate/refresh cache if needed (older than 7 days or missing)
+  if [[ ! -f "$cache_file" ]] || [[ -n $(find "$cache_file" -mtime +7 2>/dev/null) ]]; then
+    case "$cmd" in
+      kubectl)  kubectl completion zsh > "$cache_file" 2>/dev/null ;;
+      helm)     helm completion zsh > "$cache_file" 2>/dev/null ;;
+      k9s)      k9s completion zsh > "$cache_file" 2>/dev/null ;;
+      gh)       gh completion -s zsh > "$cache_file" 2>/dev/null ;;
+      docker)   docker completion zsh > "$cache_file" 2>/dev/null ;;
+      pnpm)     pnpm completion zsh > "$cache_file" 2>/dev/null ;;
+      uv)       uv generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
+      ruff)     ruff generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
+      rustup)   rustup completions zsh > "$cache_file" 2>/dev/null ;;
+      cargo)    rustup completions zsh cargo > "$cache_file" 2>/dev/null ;;
+      just)     just --completions zsh > "$cache_file" 2>/dev/null ;;
+      rg)       rg --generate complete-zsh > "$cache_file" 2>/dev/null ;;
+    esac
+  fi
+
+  # Source the completion
+  [[ -f "$cache_file" ]] && source "$cache_file"
+
+  # Run the actual command
+  command "$cmd" "$@"
+}
+
+# Create wrapper functions that trigger lazy loading on first use
+for _cmd in kubectl helm k9s gh docker pnpm uv ruff rustup cargo just rg; do
+  eval "$_cmd() { _lazy_load_completion $_cmd \"\$@\" }"
+done
+unset _cmd
+
+# qlty (homebrew completion)
+[ -s "/opt/homebrew/share/zsh/site-functions/_qlty" ] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+# Terraform (uses bashcompinit - only load if terraform exists)
+if command -v terraform &>/dev/null; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C "$(command -v terraform)" terraform
+fi
+
+# =============================================================================
+# Local overrides (not tracked in git)
+# =============================================================================
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# =============================================================================
+# Starship prompt (must be last)
+# =============================================================================
+eval "$(starship init zsh)"

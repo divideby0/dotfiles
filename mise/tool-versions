@@ -1,0 +1,48 @@
+# Global tool versions managed by mise
+# Copy to ~/.tool-versions or use `mise use -g <tool>@<version>`
+# See available tools: mise plugins ls-remote
+
+# Core languages
+nodejs 22.11.0
+python 3.13.3
+ruby 3.3.5
+java openjdk-23
+golang 1.23.3
+rust 1.82.0
+deno 2.0.5
+bun 1.2.23
+
+# Package managers
+pnpm 9.12.3
+yarn 1.22.22
+poetry 1.8.4
+uv 0.5.1
+
+# Kubernetes tooling
+kubectl 1.31.2
+helm 3.16.2
+k9s 0.32.6
+kubectx 0.9.5
+kubie 0.24.0
+kustomize 5.5.0
+stern 1.31.0
+kops v1.30.1
+krew 0.4.4
+velero 1.15.0
+skaffold 2.13.2
+
+# Cloud CLIs
+awscli 2.19.5
+aws-iam-authenticator 0.6.27
+gcloud 500.0.0
+eksctl 0.194.0
+
+# Infrastructure
+terraform 1.9.8
+terragrunt 0.68.10
+sops 3.9.1
+nomad 1.9.3
+argo 3.5.12
+
+# Build tools
+gradle 8.11

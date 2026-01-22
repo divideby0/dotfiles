@@ -283,7 +283,7 @@ cask "setapp"
 cask "microsoft-office"
 cask "xquartz"
 cask "macfuse"
-cask "mactex"
+# cask "mactex"  # Large (~4GB), install manually: brew install --cask mactex
 
 ###############################################################################
 # Fonts

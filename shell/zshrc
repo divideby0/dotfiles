@@ -34,7 +34,7 @@ plugins+=(
 export ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
 export ZSH_DISABLE_COMPFIX="true"
 
-source $ZSH/oh-my-zsh.sh
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # mise - version manager (using shims for faster startup, no per-prompt hook)
 eval "$(mise activate zsh --shims)"

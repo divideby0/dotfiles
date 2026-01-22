@@ -30,6 +30,6 @@ brew update
 
 # Install from Brewfile
 echo "Installing from Brewfile..."
-brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 echo "✓ Homebrew setup complete"

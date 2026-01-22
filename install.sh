@@ -87,6 +87,9 @@ link_file "$DOTFILES_DIR/config/gh/config.yml" "$HOME/.config/gh/config.yml"
 # zellij (terminal multiplexer)
 mkdir -p "$HOME/.config/zellij"
 link_file "$DOTFILES_DIR/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+link_file "$DOTFILES_DIR/config/zellij/plugins" "$HOME/.config/zellij/plugins"
+link_file "$DOTFILES_DIR/config/zellij/scripts" "$HOME/.config/zellij/scripts"
+link_file "$DOTFILES_DIR/config/zellij/layouts" "$HOME/.config/zellij/layouts"
 
 # =============================================================================
 # Oh My Zsh custom plugins

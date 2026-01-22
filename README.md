@@ -23,6 +23,7 @@ The bootstrap script will:
 4. Create symlinks for all dotfiles
 5. Install mise and all language runtimes
 6. Install Python tools via uv (ansible, etc.)
+7. Install standalone tools (Claude Code, etc.)
 
 ## What's Included
 
@@ -66,7 +67,8 @@ dotfiles/
 │   ├── install-homebrew.sh   # Homebrew + brew bundle
 │   ├── install-mise.sh       # mise + tool installations
 │   ├── install-oh-my-zsh.sh  # Oh My Zsh
-│   └── install-uv-tools.sh   # Python tools (ansible, etc.)
+│   ├── install-uv-tools.sh   # Python tools (ansible, etc.)
+│   └── install-standalone.sh # Curl-based tools (Claude Code, etc.)
 ├── shell/
 │   ├── zshrc                 # Main shell config
 │   ├── zshenv                # Environment variables

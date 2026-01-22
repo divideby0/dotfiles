@@ -62,5 +62,8 @@ tilt 0.36.1
 doctl 1.148.0
 pulumi 3.216.0
 
+# Database
+redis 8.4.0
+
 # DevOps
 # ansible - installed via `uv tool install ansible-core` (not mise)

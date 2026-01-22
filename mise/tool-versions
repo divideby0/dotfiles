@@ -34,7 +34,7 @@ skaffold 2.13.2
 # Cloud CLIs
 awscli 2.19.5
 aws-iam-authenticator 0.6.27
-gcloud 500.0.0
+# gcloud 500.0.0  # Use brew cask instead (mise version needs sudo)
 eksctl 0.194.0
 
 # Infrastructure

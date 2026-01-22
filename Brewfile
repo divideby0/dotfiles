@@ -216,7 +216,7 @@ cask "skype"
 # Casks - Cloud & VPN
 ###############################################################################
 cask "google-drive"
-# cask "gcloud-cli"  # Managed by mise
+cask "gcloud-cli"  # Keep in brew (mise version needs sudo)
 cask "expressvpn"
 cask "viscosity"
 cask "pritunl"

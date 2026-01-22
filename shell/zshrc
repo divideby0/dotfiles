@@ -91,6 +91,15 @@ kill-port() {
   fi
 }
 
+# mkdir and cd in one command (oh-my-zsh has 'take' but mkcd is more memorable)
+mkcd() { mkdir -p "$1" && cd "$1" }
+
+# Docker helpers
+dstop() { docker stop $(docker ps -a -q) }
+drm() { docker rm $(docker ps -a -q) }
+dri() { docker rmi $(docker images -q) }
+driut() { docker rmi $(docker images -q --filter "dangling=true") }
+
 # Core aliases
 alias kp='kill-port'
 alias ls="ls -g"

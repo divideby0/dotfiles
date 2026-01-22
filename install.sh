@@ -117,6 +117,27 @@ mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 # =============================================================================
+# Editor configuration (Cursor + VSCode)
+# =============================================================================
+info "Installing editor configuration..."
+
+# Cursor
+CURSOR_USER_DIR="$HOME/Library/Application Support/Cursor/User"
+if [[ -d "$CURSOR_USER_DIR" ]]; then
+    link_file "$DOTFILES_DIR/editors/settings.json" "$CURSOR_USER_DIR/settings.json"
+else
+    warn "Cursor not found at $CURSOR_USER_DIR"
+fi
+
+# VSCode (shares same settings)
+VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+if [[ -d "$VSCODE_USER_DIR" ]]; then
+    link_file "$DOTFILES_DIR/editors/settings.json" "$VSCODE_USER_DIR/settings.json"
+else
+    warn "VSCode not found at $VSCODE_USER_DIR"
+fi
+
+# =============================================================================
 # Post-install checks
 # =============================================================================
 echo ""

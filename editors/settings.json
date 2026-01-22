@@ -1,0 +1,208 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 120],
+  "editor.formatOnSave": true,
+
+  "typescript.validate.enable": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  "[postgres]": {
+    "editor.defaultFormatter": "mblode.pretty-formatter"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "mikeburgh.xml-format"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "mbessey.vscode-rufo"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+
+  "files.associations": {
+    "*.sql": "postgres"
+  },
+
+  "indentRainbow.excludedLanguages": ["python", "plaintext"],
+  "search.useIgnoreFiles": false,
+  "terraform.experimentalFeatures.validateOnSave": true,
+
+  "conventionalCommits.scopes": [
+    "api",
+    "ci-cd",
+    "common",
+    "database",
+    "data",
+    "docker",
+    "docs",
+    "elasticsearch",
+    "etl",
+    "git",
+    "iam",
+    "infra",
+    "ingest",
+    "k8s",
+    "monitoring",
+    "project",
+    "querydsl",
+    "rally",
+    "struct",
+    "style",
+    "terraform",
+    "ui-ux"
+  ],
+  "conventionalCommits.showEditor": true,
+
+  "workbench.iconTheme": "material-icon-theme",
+
+  "gitlens.views.tags.branches.layout": "list",
+  "gitlens.views.remotes.branches.layout": "list",
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+
+  "git.ignoreRebaseWarning": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.suggestSmartCommit": false,
+  "githubPullRequests.pullBranch": "never",
+  "githubPullRequests.createOnPublishBranch": "never",
+
+  "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
+  "terminal.integrated.confirmOnExit": "hasChildProcesses",
+  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.scrollback": 250,
+  "terminal.integrated.fontLigatures.enabled": true,
+
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+
+  "notebook.lineNumbers": "on",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "window.openWithoutArgumentsInNewWindow": "on",
+  "quokka.compactMessageOutput": true,
+  "explorer.confirmPasteNative": false,
+  "extensions.ignoreRecommendations": true,
+  "makefile.configureOnOpen": true,
+  "redhat.telemetry.enabled": false,
+  "rapidapi.terminalLink.enabled": false,
+
+  "unsaved-files.viewOnExplorer.enabled": true,
+
+  "nxConsole.showNodeVersionOnStartup": false,
+  "nxConsole.commonNxCommands": [
+    "run-many",
+    "affected",
+    "affected:graph",
+    "list",
+    "migrate"
+  ],
+
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+
+  "amazonQ.showInlineCodeSuggestionsWithCodeReferences": false,
+  "amazonQ.importRecommendationForInlineCodeSuggestions": false,
+  "amazonQ.shareContentWithAWS": false,
+
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.composer.backspaceRemoveContext": false,
+  "cursor.diffs.useCharacterLevelDiffs": true,
+  "cursor.terminal.usePreviewBox": true,
+  "cursor.cpp.disabledLanguages": [
+    "plaintext",
+    "markdown",
+    "scminput"
+  ],
+
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.allowDangerouslySkipPermissions": true,
+
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  }
+}

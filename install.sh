@@ -109,6 +109,14 @@ info "Installing miscellaneous configuration..."
 link_file "$DOTFILES_DIR/misc/screenrc" "$HOME/.screenrc"
 
 # =============================================================================
+# Claude Code configuration
+# =============================================================================
+info "Installing Claude Code configuration..."
+
+mkdir -p "$HOME/.claude"
+link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+# =============================================================================
 # Post-install checks
 # =============================================================================
 echo ""

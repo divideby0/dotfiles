@@ -21,6 +21,25 @@ eval "$(mise activate bash --shims)"
 # Trust the dotfiles directory
 mise trust "$DOTFILES_DIR"
 
+# GitHub auth for mise (avoids rate limits when downloading tools)
+if [[ -z "$GITHUB_TOKEN" ]]; then
+    if command -v gh &>/dev/null; then
+        if gh auth status &>/dev/null; then
+            echo "Using GitHub token from gh CLI..."
+            export GITHUB_TOKEN=$(gh auth token)
+        else
+            echo ""
+            echo "GitHub authentication recommended to avoid rate limits."
+            read -p "Authenticate now? [y/N] " -n 1 -r
+            echo ""
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                gh auth login
+                export GITHUB_TOKEN=$(gh auth token)
+            fi
+        fi
+    fi
+fi
+
 # Install all tools from tool-versions
 echo "Installing tools from .tool-versions..."
 mise install

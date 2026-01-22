@@ -265,6 +265,9 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        _allow_exec_host_cmd true
+    }
 }
 
 // Plugins to load in the background when a new session starts

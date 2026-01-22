@@ -3,3 +3,6 @@
 
 # Claude Code settings (contains API keys in MCP env vars)
 .claude/
+
+# Scratch directory for temporary files
+.scratch/

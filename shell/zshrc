@@ -93,6 +93,14 @@ alias kp='kill-port'
 alias ls="ls -g"
 alias zshconfig="$EDITOR ~/.zshrc"
 
+# Claude Code
+alias cdsp="NODE_OPTIONS='--max-old-space-size=8192 --max-semi-space-size=256 --max-http-header-size=16384' claude --dangerously-skip-permissions"
+alias cfd="cdsp"
+
+# Task Master
+alias tm='task-master'
+alias ham='task-master'
+
 # Build tools
 alias mk='/usr/bin/find . -maxdepth 2 -name Makefile -exec make -C {} \;'
 

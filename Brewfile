@@ -4,7 +4,7 @@ cask_args appdir: "/Applications"
 # Taps
 ###############################################################################
 tap "heroku/brew"
-tap "ringohub/redis-cli"
+# tap "ringohub/redis-cli"  # Removed: broken/outdated
 tap "ankitpokhrel/jira-cli"
 tap "cirruslabs/cli"
 tap "ddev/ddev"
@@ -90,7 +90,7 @@ brew "youtube-dl"
 # Database Tools
 ###############################################################################
 brew "postgresql@17"
-brew "aoki/redis-cli/redis-cli"
+# brew "aoki/redis-cli/redis-cli"  # Removed: broken tap, use `redis` package if needed
 brew "cypher-shell"
 brew "kcat"
 
@@ -216,7 +216,6 @@ cask "skype"
 # Casks - Cloud & VPN
 ###############################################################################
 cask "google-drive"
-cask "google-cloud-sdk"
 cask "gcloud-cli"
 cask "expressvpn"
 cask "viscosity"
@@ -231,7 +230,7 @@ cask "spotify"
 cask "plex"
 cask "plex-media-server"
 cask "obs"
-cask "handbrake"
+cask "handbrake-app"
 cask "losslesscut"
 cask "audacity"
 cask "descript"
@@ -276,7 +275,7 @@ cask "google-earth-pro"
 cask "phantomjs"
 cask "multipass"
 cask "mqtt-explorer"
-cask "nomad"
+cask "nomad-menu"
 cask "ubiquiti-unifi-controller"
 cask "elgato-control-center"
 cask "elgato-stream-deck"

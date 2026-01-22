@@ -12,58 +12,58 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
 
   "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
+    "editor.defaultFormatter": "Prisma.prisma",
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
   },
   "[terraform-vars]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file"
+    "editor.formatOnSaveMode": "file",
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
     "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file"
+    "editor.formatOnSaveMode": "file",
   },
   "[sql]": {
-    "editor.defaultFormatter": "mtxr.sqltools"
+    "editor.defaultFormatter": "mtxr.sqltools",
   },
   "[postgres]": {
-    "editor.defaultFormatter": "mblode.pretty-formatter"
+    "editor.defaultFormatter": "mblode.pretty-formatter",
   },
   "[xml]": {
-    "editor.defaultFormatter": "mikeburgh.xml-format"
+    "editor.defaultFormatter": "mikeburgh.xml-format",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "vscode.typescript-language-features",
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "vscode.json-language-features",
   },
   "[java]": {
-    "editor.defaultFormatter": "redhat.java"
+    "editor.defaultFormatter": "redhat.java",
   },
   "[ruby]": {
-    "editor.defaultFormatter": "mbessey.vscode-rufo"
+    "editor.defaultFormatter": "mbessey.vscode-rufo",
   },
   "[markdown]": {
-    "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
+    "editor.defaultFormatter": "darkriszty.markdown-table-prettify",
   },
   "[dockercompose]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 2,
     "editor.autoIndent": "advanced",
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
 
   "files.associations": {
-    "*.sql": "postgres"
+    "*.sql": "postgres",
   },
 
   "indentRainbow.excludedLanguages": ["python", "plaintext"],
@@ -92,7 +92,7 @@
     "struct",
     "style",
     "terraform",
-    "ui-ux"
+    "ui-ux",
   ],
   "conventionalCommits.showEditor": true,
 
@@ -143,7 +143,7 @@
     "!Select",
     "!Select sequence",
     "!Split",
-    "!Split sequence"
+    "!Split sequence",
   ],
 
   "notebook.lineNumbers": "on",
@@ -164,14 +164,14 @@
     "affected",
     "affected:graph",
     "list",
-    "migrate"
+    "migrate",
   ],
 
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
-    "scminput": false
+    "scminput": false,
   },
 
   "amazonQ.showInlineCodeSuggestionsWithCodeReferences": false,
@@ -182,11 +182,7 @@
   "cursor.composer.backspaceRemoveContext": false,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.terminal.usePreviewBox": true,
-  "cursor.cpp.disabledLanguages": [
-    "plaintext",
-    "markdown",
-    "scminput"
-  ],
+  "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
 
   "claudeCode.preferredLocation": "panel",
   "claudeCode.allowDangerouslySkipPermissions": true,
@@ -203,6 +199,10 @@
     "*.sqlite3": "${capture}.${extname}-*",
     "*.db3": "${capture}.${extname}-*",
     "*.sdb": "${capture}.${extname}-*",
-    "*.s3db": "${capture}.${extname}-*"
-  }
+    "*.s3db": "${capture}.${extname}-*",
+  },
+  "workbench.colorCustomizations": {},
+  "yaml.schemas": {
+    "file:///Users/cedric/.cursor/extensions/atlassian.atlascode-4.0.14-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+  },
 }

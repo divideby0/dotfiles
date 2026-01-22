@@ -2,46 +2,93 @@
 
 Personal dotfiles for macOS (Apple Silicon).
 
+## Fresh Mac Setup
+
+```bash
+# 1. Install Xcode CLI tools (prompted automatically)
+xcode-select --install
+
+# 2. Clone this repo
+git clone https://github.com/divideby0/dotfiles.git ~/src/divideby0/dotfiles
+
+# 3. Run bootstrap
+cd ~/src/divideby0/dotfiles
+./bootstrap.sh
+```
+
+The bootstrap script will:
+1. Install Rosetta (Apple Silicon)
+2. Install Homebrew and all packages from Brewfile
+3. Install Oh My Zsh
+4. Create symlinks for all dotfiles
+5. Install mise and all language runtimes
+6. Install Python tools via uv (ansible, etc.)
+
 ## What's Included
 
-- **Shell**: zsh with Oh My Zsh, optimized for fast startup
-- **Prompt**: Starship with custom powerline theme
-- **Git**: Sensible defaults, useful aliases, git-lfs support
-- **Version Manager**: mise (formerly rtx) for managing language runtimes
-- **Completions**: Lazy-loaded for kubectl, helm, docker, pnpm, etc.
+### Package Management
 
-## Prerequisites
+- **Homebrew**: macOS packages and casks (see `Brewfile`)
+- **mise**: Language runtimes and dev tools (see `mise/tool-versions`)
+- **uv**: Python CLI tools like ansible
 
-Install [Homebrew](https://brew.sh) first:
+### Shell
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+- **zsh** with Oh My Zsh
+- **Starship** prompt with custom powerline theme
+- Lazy-loaded completions for fast startup
+- Trimmed plugin set for performance
+
+### Development Tools
+
+Languages managed by mise:
+- Node.js, Python, Ruby, Go, Rust, Java, Deno, Bun
+
+Kubernetes tools:
+- kubectl, helm, k9s, kops, kubie, kind, tilt, skaffold
+
+Infrastructure:
+- Terraform, Terragrunt, Pulumi, Ansible
+
+### Editors
+
+- Cursor and VSCode share the same settings
+- Claude Code global configuration
+
+## Structure
+
 ```
-
-Then install required tools:
-
-```bash
-brew install starship mise
+dotfiles/
+├── bootstrap.sh              # Fresh Mac setup (run this first)
+├── install.sh                # Symlink installer (idempotent)
+├── Brewfile                  # Homebrew packages and casks
+├── scripts/
+│   ├── install-homebrew.sh   # Homebrew + brew bundle
+│   ├── install-mise.sh       # mise + tool installations
+│   ├── install-oh-my-zsh.sh  # Oh My Zsh
+│   └── install-uv-tools.sh   # Python tools (ansible, etc.)
+├── shell/
+│   ├── zshrc                 # Main shell config
+│   ├── zshenv                # Environment variables
+│   └── zprofile              # Login shell (Homebrew)
+├── git/
+│   ├── gitconfig             # Git configuration
+│   └── gitignore_global      # Global gitignore
+├── editors/
+│   └── settings.json         # Shared Cursor/VSCode settings
+├── config/
+│   └── starship.toml         # Prompt configuration
+├── claude/
+│   └── CLAUDE.md             # Claude Code global config
+├── mise/
+│   ├── config.toml           # mise settings
+│   └── tool-versions         # Global tool versions
+├── oh-my-zsh-custom/
+│   └── plugins/
+│       └── custom-set-path/  # Custom PATH plugin
+└── misc/
+    └── screenrc
 ```
-
-Install Oh My Zsh:
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-## Installation
-
-```bash
-git clone git@github.com:divideby0/dotfiles.git ~/src/divideby0/dotfiles
-cd ~/src/divideby0/dotfiles
-./install.sh
-```
-
-The installer:
-- Creates symlinks from `~` to this repo
-- Backs up existing files to `~/.dotfiles-backup/`
-- Is idempotent (safe to run multiple times)
 
 ## Post-Install Setup
 
@@ -57,68 +104,21 @@ Create `~/.gitconfig.local`:
 
 ### Machine-specific settings
 
-Create `~/.zshrc.local` for local aliases, secrets, or overrides:
-
-```bash
-# Example: work-specific settings
-export AWS_PROFILE=mycompany
-alias deploy='./scripts/deploy.sh'
-```
-
-### Install tool versions
-
-```bash
-mise install
-```
-
-## Structure
-
-```
-dotfiles/
-├── install.sh                      # Symlink installer
-├── shell/
-│   ├── zshrc                       # Main shell config
-│   ├── zshenv                      # Environment variables
-│   └── zprofile                    # Login shell setup (Homebrew)
-├── git/
-│   ├── gitconfig                   # Git configuration
-│   └── gitignore_global            # Global gitignore
-├── config/
-│   └── starship.toml               # Prompt configuration
-├── oh-my-zsh-custom/
-│   └── plugins/
-│       └── custom-set-path/        # Custom PATH plugin
-├── mise/
-│   ├── config.toml                 # mise settings
-│   └── tool-versions               # Global tool versions
-└── misc/
-    └── screenrc                    # GNU Screen config
-```
-
-## Companion Repos
-
-- **[homebrew-brewfile](https://github.com/divideby0/homebrew-brewfile)**: Brewfile and macOS setup scripts
-
-## Customization
-
-### Adding aliases
-
-Edit `shell/zshrc` or add to `~/.zshrc.local` for machine-specific aliases.
-
-### Changing the prompt
-
-Edit `config/starship.toml`. See [Starship docs](https://starship.rs/config/).
-
-### Adding tool versions
-
-Edit `mise/tool-versions` or use:
-
-```bash
-mise use -g nodejs@22
-```
+Create `~/.zshrc.local` for local aliases, secrets, or overrides.
 
 ## Philosophy
 
-- **Fast startup**: Lazy-load completions, minimal plugins
-- **Portable**: No hardcoded paths, secrets in `.local` files
-- **Simple**: Symlinks over copy, explicit over magical
+- **mise over brew** for dev tools: Version management per-project
+- **Symlinks over copy**: Edit dotfiles, changes apply immediately
+- **Secrets in `.local` files**: Never tracked in git
+- **Fast startup**: Lazy completions, minimal plugins
+
+## Updating
+
+```bash
+cd ~/src/divideby0/dotfiles
+git pull
+./install.sh          # Re-run symlinks if structure changed
+mise install          # Install any new tool versions
+brew bundle           # Install any new Homebrew packages
+```

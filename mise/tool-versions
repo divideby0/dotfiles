@@ -46,3 +46,21 @@ argo 3.5.12
 
 # Build tools
 gradle 8.11
+maven 3.9.12
+
+# CLI tools
+just 1.46.0
+eza 0.23.4
+starship 1.24.2
+zellij 0.43.1
+
+# Container/K8s dev
+kind 0.31.0
+tilt 0.36.1
+
+# Cloud CLIs (additional)
+doctl 1.148.0
+pulumi 3.216.0
+
+# DevOps
+# ansible - installed via `uv tool install ansible-core` (not mise)

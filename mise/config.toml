@@ -11,3 +11,6 @@ auto_install = false
 
 # Trust all config files by default (set to false for stricter security)
 trusted_config_paths = ["~"]
+
+[tools]
+redis = "8.4.0"

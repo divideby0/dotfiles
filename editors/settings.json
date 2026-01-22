@@ -203,6 +203,6 @@
   },
   "workbench.colorCustomizations": {},
   "yaml.schemas": {
-    "file:///Users/cedric/.cursor/extensions/atlassian.atlascode-4.0.14-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+    "file:///Users/cedric/.cursor/extensions/atlassian.atlascode-4.0.16-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
   },
 }

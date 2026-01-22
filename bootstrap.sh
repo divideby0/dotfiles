@@ -84,8 +84,8 @@ info "Step 5/6: Installing uv tools..."
 "$DOTFILES_DIR/scripts/install-uv-tools.sh"
 echo ""
 
-info "Step 6/6: Installing standalone tools..."
-"$DOTFILES_DIR/scripts/install-standalone.sh"
+info "Step 6/6: Installing Claude Code..."
+"$DOTFILES_DIR/scripts/install-claude-code.sh"
 echo ""
 
 # =============================================================================

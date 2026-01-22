@@ -80,6 +80,14 @@ info "Installing Starship configuration..."
 mkdir -p "$HOME/.config"
 link_file "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
 
+# gh (GitHub CLI)
+mkdir -p "$HOME/.config/gh"
+link_file "$DOTFILES_DIR/config/gh/config.yml" "$HOME/.config/gh/config.yml"
+
+# zellij (terminal multiplexer)
+mkdir -p "$HOME/.config/zellij"
+link_file "$DOTFILES_DIR/config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+
 # =============================================================================
 # Oh My Zsh custom plugins
 # =============================================================================
@@ -109,7 +117,7 @@ info "Installing miscellaneous configuration..."
 link_file "$DOTFILES_DIR/misc/screenrc" "$HOME/.screenrc"
 
 # =============================================================================
-# Claude Code configuration
+# Claude Code configuration (CLAUDE.md only - settings handled by install-standalone.sh)
 # =============================================================================
 info "Installing Claude Code configuration..."
 

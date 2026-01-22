@@ -64,24 +64,28 @@ chmod +x "$DOTFILES_DIR/install.sh"
 # Run installation scripts in order
 # =============================================================================
 
-info "Step 1/5: Installing Homebrew and packages..."
+info "Step 1/6: Installing Homebrew and packages..."
 "$DOTFILES_DIR/scripts/install-homebrew.sh"
 echo ""
 
-info "Step 2/5: Installing Oh My Zsh..."
+info "Step 2/6: Installing Oh My Zsh..."
 "$DOTFILES_DIR/scripts/install-oh-my-zsh.sh"
 echo ""
 
-info "Step 3/5: Creating symlinks..."
+info "Step 3/6: Creating symlinks..."
 "$DOTFILES_DIR/install.sh"
 echo ""
 
-info "Step 4/5: Installing mise and tools..."
+info "Step 4/6: Installing mise and tools..."
 "$DOTFILES_DIR/scripts/install-mise.sh"
 echo ""
 
-info "Step 5/5: Installing uv tools..."
+info "Step 5/6: Installing uv tools..."
 "$DOTFILES_DIR/scripts/install-uv-tools.sh"
+echo ""
+
+info "Step 6/6: Installing Claude Code..."
+"$DOTFILES_DIR/scripts/install-claude-code.sh"
 echo ""
 
 # =============================================================================

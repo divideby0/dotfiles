@@ -1,11 +1,11 @@
 layout {
     default_tab_template {
-        // Status bar at top
+        // zjstatus bar at top
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "{mode}#[bg=default] {session}"
                 format_center "{tabs}"
-                format_right  "{command_cpu}{command_mem}{command_disk}{command_net}{command_batt}{datetime}"
+                format_right  "{command_cpu}{command_mem}{command_disk}{command_batt}{datetime}"
 
                 // Mode indicators
                 mode_normal        "#[bg=blue,fg=black,bold] NORMAL "
@@ -22,42 +22,38 @@ layout {
                 tab_normal              "#[fg=white] {name} "
                 tab_active              "#[fg=cyan,bold] {name} "
                 tab_separator           "#[fg=brightblack]│"
-                tab_sync_indicator      " "
-                tab_fullscreen_indicator " "
-                tab_floating_indicator  " "
 
-                // System stats commands
-                command_cpu_command     "~/.config/zellij/scripts/stats.sh cpu"
-                command_cpu_format      "#[fg=blue]  {stdout}% "
+                // System stats commands (use $HOME instead of ~)
+                command_cpu_command     "$HOME/.config/zellij/scripts/stats.sh cpu"
+                command_cpu_format      "#[fg=blue] {stdout}%"
                 command_cpu_interval    "5"
                 command_cpu_rendermode  "static"
 
-                command_mem_command     "~/.config/zellij/scripts/stats.sh mem"
-                command_mem_format      "#[fg=green]  {stdout}% "
+                command_mem_command     "$HOME/.config/zellij/scripts/stats.sh mem"
+                command_mem_format      "#[fg=green] {stdout}%"
                 command_mem_interval    "5"
                 command_mem_rendermode  "static"
 
-                command_disk_command    "~/.config/zellij/scripts/stats.sh disk"
-                command_disk_format     "#[fg=yellow]  {stdout}% "
+                command_disk_command    "$HOME/.config/zellij/scripts/stats.sh disk"
+                command_disk_format     "#[fg=yellow] {stdout}%"
                 command_disk_interval   "30"
                 command_disk_rendermode "static"
 
-                command_net_command     "~/.config/zellij/scripts/stats.sh net"
-                command_net_format      "#[fg=magenta]  {stdout} "
-                command_net_interval    "10"
-                command_net_rendermode  "static"
-
-                command_batt_command    "~/.config/zellij/scripts/stats.sh batt"
-                command_batt_format     "#[fg=cyan]  {stdout}% "
+                command_batt_command    "$HOME/.config/zellij/scripts/stats.sh batt"
+                command_batt_format     "#[fg=cyan] {stdout}%"
                 command_batt_interval   "60"
                 command_batt_rendermode "static"
 
                 // Date/time
-                datetime          "#[fg=brightblack] {format} "
+                datetime          "#[fg=brightblack] {format}"
                 datetime_format   "%H:%M"
                 datetime_timezone "America/Chicago"
             }
         }
         children
+        // Bottom status bar with keyboard hints
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
     }
 }

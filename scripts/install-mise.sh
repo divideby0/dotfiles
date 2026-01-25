@@ -12,7 +12,14 @@ echo "=== mise Setup ==="
 # Install mise if not present
 if ! command -v mise &>/dev/null; then
     echo "Installing mise..."
-    brew install mise
+    if command -v brew &>/dev/null; then
+        brew install mise
+    else
+        # Use official installer for Linux/other systems
+        curl https://mise.run | sh
+        # Add to PATH for this session
+        export PATH="$HOME/.local/bin:$PATH"
+    fi
 fi
 
 # Activate mise for this session

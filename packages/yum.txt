@@ -1,0 +1,41 @@
+# Core CLI tools for Amazon Linux/RHEL/CentOS
+# Install with: xargs -a yum.txt sudo yum install -y
+
+# Shell
+zsh
+
+# Version control
+git
+git-lfs
+# gh - install from GitHub releases
+
+# Search & files
+ripgrep
+jq
+tree
+fzf
+# fd-find - may need to install from releases
+
+# Network
+curl
+wget
+socat
+
+# Development
+make
+autoconf
+gcc
+gcc-c++
+
+# Utilities
+htop
+tmux
+screen
+unzip
+zip
+p7zip
+
+# Note: These are handled by mise instead:
+# - nodejs, python, ruby, go, rust, java
+# - kubectl, helm, terraform
+# - starship (install via mise or curl)

@@ -1,0 +1,42 @@
+# Core CLI tools for Debian/Ubuntu
+# Install with: xargs -a apt.txt sudo apt-get install -y
+
+# Shell
+zsh
+zsh-completions
+
+# Version control
+git
+git-lfs
+gh
+
+# Search & files
+ripgrep
+jq
+tree
+fzf
+fd-find
+
+# Network
+curl
+wget
+httpie
+socat
+
+# Development
+build-essential
+make
+autoconf
+
+# Utilities
+htop
+tmux
+screen
+unzip
+zip
+p7zip-full
+
+# Note: These are handled by mise instead:
+# - nodejs, python, ruby, go, rust, java
+# - kubectl, helm, terraform
+# - starship (install via mise or curl)

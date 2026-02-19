@@ -3,14 +3,15 @@
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.renderWhitespace": "all",
-  "editor.rulers": [80, 120],
+  "editor.rulers": [
+    80,
+    120
+  ],
   "editor.formatOnSave": true,
-
   "typescript.validate.enable": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.updateImportsOnFileMove.enabled": "never",
   "javascript.updateImportsOnFileMove.enabled": "always",
-
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma",
   },
@@ -61,15 +62,15 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml",
   },
-
   "files.associations": {
     "*.sql": "postgres",
   },
-
-  "indentRainbow.excludedLanguages": ["python", "plaintext"],
+  "indentRainbow.excludedLanguages": [
+    "python",
+    "plaintext"
+  ],
   "search.useIgnoreFiles": false,
   "terraform.experimentalFeatures.validateOnSave": true,
-
   "conventionalCommits.scopes": [
     "api",
     "ci-cd",
@@ -95,27 +96,22 @@
     "ui-ux",
   ],
   "conventionalCommits.showEditor": true,
-
   "workbench.iconTheme": "material-icon-theme",
-
   "gitlens.views.tags.branches.layout": "list",
   "gitlens.views.remotes.branches.layout": "list",
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-
   "git.ignoreRebaseWarning": true,
   "git.confirmSync": false,
   "git.autofetch": true,
   "git.suggestSmartCommit": false,
   "githubPullRequests.pullBranch": "never",
   "githubPullRequests.createOnPublishBranch": "never",
-
   "terminal.integrated.fontFamily": "Meslo LG L DZ for Powerline",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.gpuAcceleration": "off",
   "terminal.integrated.scrollback": 250,
   "terminal.integrated.fontLigatures.enabled": true,
-
   "yaml.customTags": [
     "!And",
     "!And sequence",
@@ -145,7 +141,6 @@
     "!Split",
     "!Split sequence",
   ],
-
   "notebook.lineNumbers": "on",
   "diffEditor.ignoreTrimWhitespace": false,
   "window.openWithoutArgumentsInNewWindow": "on",
@@ -155,9 +150,7 @@
   "makefile.configureOnOpen": true,
   "redhat.telemetry.enabled": false,
   "rapidapi.terminalLink.enabled": false,
-
   "unsaved-files.viewOnExplorer.enabled": true,
-
   "nxConsole.showNodeVersionOnStartup": false,
   "nxConsole.commonNxCommands": [
     "run-many",
@@ -166,27 +159,26 @@
     "list",
     "migrate",
   ],
-
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
   },
-
   "amazonQ.showInlineCodeSuggestionsWithCodeReferences": false,
   "amazonQ.importRecommendationForInlineCodeSuggestions": false,
   "amazonQ.shareContentWithAWS": false,
-
   "cursor.composer.shouldChimeAfterChatFinishes": true,
   "cursor.composer.backspaceRemoveContext": false,
   "cursor.diffs.useCharacterLevelDiffs": true,
   "cursor.terminal.usePreviewBox": true,
-  "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
-
+  "cursor.cpp.disabledLanguages": [
+    "plaintext",
+    "markdown",
+    "scminput"
+  ],
   "claudeCode.preferredLocation": "panel",
   "claudeCode.allowDangerouslySkipPermissions": true,
-
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.js",
     "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
@@ -199,7 +191,7 @@
     "*.sqlite3": "${capture}.${extname}-*",
     "*.db3": "${capture}.${extname}-*",
     "*.sdb": "${capture}.${extname}-*",
-    "*.s3db": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
   },
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#608c65",
@@ -222,5 +214,11 @@
   },
   "yaml.schemas": {
     "file:///Users/cedric/.cursor/extensions/atlassian.atlascode-4.0.17-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
 }

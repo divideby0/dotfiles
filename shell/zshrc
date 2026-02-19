@@ -160,18 +160,18 @@ _lazy_load_completion() {
   # Generate/refresh cache if needed (older than 7 days or missing)
   if [[ ! -f "$cache_file" ]] || [[ -n $(find "$cache_file" -mtime +7 2>/dev/null) ]]; then
     case "$cmd" in
-      kubectl)  kubectl completion zsh > "$cache_file" 2>/dev/null ;;
-      helm)     helm completion zsh > "$cache_file" 2>/dev/null ;;
-      k9s)      k9s completion zsh > "$cache_file" 2>/dev/null ;;
-      gh)       gh completion -s zsh > "$cache_file" 2>/dev/null ;;
-      docker)   docker completion zsh > "$cache_file" 2>/dev/null ;;
-      pnpm)     pnpm completion zsh > "$cache_file" 2>/dev/null ;;
-      uv)       uv generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
-      ruff)     ruff generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
-      rustup)   rustup completions zsh > "$cache_file" 2>/dev/null ;;
-      cargo)    rustup completions zsh cargo > "$cache_file" 2>/dev/null ;;
-      just)     just --completions zsh > "$cache_file" 2>/dev/null ;;
-      rg)       rg --generate complete-zsh > "$cache_file" 2>/dev/null ;;
+      kubectl)  command kubectl completion zsh > "$cache_file" 2>/dev/null ;;
+      helm)     command helm completion zsh > "$cache_file" 2>/dev/null ;;
+      k9s)      command k9s completion zsh > "$cache_file" 2>/dev/null ;;
+      gh)       command gh completion -s zsh > "$cache_file" 2>/dev/null ;;
+      docker)   command docker completion zsh > "$cache_file" 2>/dev/null ;;
+      pnpm)     command pnpm completion zsh > "$cache_file" 2>/dev/null ;;
+      uv)       command uv generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
+      ruff)     command ruff generate-shell-completion zsh > "$cache_file" 2>/dev/null ;;
+      rustup)   command rustup completions zsh > "$cache_file" 2>/dev/null ;;
+      cargo)    command rustup completions zsh cargo > "$cache_file" 2>/dev/null ;;
+      just)     command just --completions zsh > "$cache_file" 2>/dev/null ;;
+      rg)       command rg --generate complete-zsh > "$cache_file" 2>/dev/null ;;
     esac
   fi
 
@@ -208,3 +208,8 @@ fi
 # Starship prompt (must be last)
 # =============================================================================
 eval "$(starship init zsh)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/cedric/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

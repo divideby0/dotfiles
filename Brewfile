@@ -100,8 +100,8 @@ brew "kcat"
 ###############################################################################
 brew "awscli"                         # Keep for initial bootstrap before mise
 brew "doppler"
-brew "teleport"
-brew "velero"
+# brew "teleport"             # Removed: no longer used
+# brew "velero"              # Removed: no longer used (also pinned in mise)
 brew "supabase"
 brew "runpod/runpodctl/runpodctl"
 # cloud-sql-proxy: via gcloud component, not brew
@@ -127,7 +127,7 @@ brew "ddev/ddev/ddev"
 brew "gnupg"
 brew "bfg"
 brew "diceware"
-brew "magic-wormhole"
+# brew "magic-wormhole"      # Removed: no longer used
 brew "semgrep"
 brew "testdisk"
 

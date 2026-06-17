@@ -77,11 +77,25 @@ chmod +x "$DOTFILES_DIR/scripts/lib/"*.sh 2>/dev/null || true
 chmod +x "$DOTFILES_DIR/install.sh"
 
 # =============================================================================
+# Keep sudo credentials warm for the whole run
+#
+# Many casks shell out to sudo (pkg installers, system locations). Without
+# this they prompt for a password repeatedly mid-run. Authenticate once up
+# front, then refresh the timestamp in the background until bootstrap exits.
+# If sudo is already passwordless (NOPASSWD), `sudo -v` is a silent no-op.
+# =============================================================================
+if command -v sudo &>/dev/null; then
+    info "Caching sudo credentials (you may be prompted once)..."
+    sudo -v
+    while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done &
+fi
+
+# =============================================================================
 # Run installation scripts in order
 # =============================================================================
 
 # Step 1: Package manager setup
-info "Step 1/7: Installing system packages..."
+info "Step 1/8: Installing system packages..."
 if [[ "$OS" == "macos" ]]; then
     "$DOTFILES_DIR/scripts/install-homebrew.sh"
 elif [[ "$OS" == "debian" ]]; then
@@ -96,40 +110,49 @@ fi
 echo ""
 
 # Step 2: Oh My Zsh
-info "Step 2/7: Installing Oh My Zsh..."
+info "Step 2/8: Installing Oh My Zsh..."
 "$DOTFILES_DIR/scripts/install-oh-my-zsh.sh"
 echo ""
 
 # Step 3: Symlinks
-info "Step 3/7: Creating symlinks..."
+info "Step 3/8: Creating symlinks..."
 "$DOTFILES_DIR/install.sh"
 echo ""
 
 # Step 4: mise
-info "Step 4/7: Installing mise and tools..."
+info "Step 4/8: Installing mise and tools..."
 "$DOTFILES_DIR/scripts/install-mise.sh"
 echo ""
 
 # Step 5: uv tools (Python)
-info "Step 5/7: Installing uv tools..."
+info "Step 5/8: Installing uv tools..."
 "$DOTFILES_DIR/scripts/install-uv-tools.sh"
 echo ""
 
 # Step 6: gcloud components (macOS only - depends on the gcloud-cli cask)
 if [[ "$OS" == "macos" ]]; then
-    info "Step 6/7: Installing gcloud components..."
+    info "Step 6/8: Installing gcloud components..."
     "$DOTFILES_DIR/scripts/install-gcloud-components.sh"
 else
-    info "Step 6/7: Skipping gcloud components (macOS only)"
+    info "Step 6/8: Skipping gcloud components (macOS only)"
 fi
 echo ""
 
 # Step 7: Claude Code (optional, skip on servers)
 if [[ "$OS" == "macos" ]] || [[ -n "$INSTALL_CLAUDE" ]]; then
-    info "Step 7/7: Installing Claude Code..."
+    info "Step 7/8: Installing Claude Code..."
     "$DOTFILES_DIR/scripts/install-claude-code.sh"
 else
-    info "Step 7/7: Skipping Claude Code (set INSTALL_CLAUDE=1 to install)"
+    info "Step 7/8: Skipping Claude Code (set INSTALL_CLAUDE=1 to install)"
+fi
+echo ""
+
+# Step 8: Touch ID for sudo (macOS only; self-skips on remote/no-sensor)
+if [[ "$OS" == "macos" ]]; then
+    info "Step 8/8: Configuring Touch ID for sudo..."
+    "$DOTFILES_DIR/scripts/setup-touchid-sudo.sh"
+else
+    info "Step 8/8: Skipping Touch ID for sudo (macOS only)"
 fi
 echo ""
 

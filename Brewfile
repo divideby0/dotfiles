@@ -302,14 +302,14 @@ end
 ###############################################################################
 if gui
   cask "betterzip"
-  cask "rar"
+  # cask "rar"                  # Removed: deprecated in homebrew (2026-09-01)
   cask "caffeine"
   # cask "cheatsheet"           # Removed: disabled in homebrew (2025-11-09)
   cask "keyboard-cleaner"
   cask "smcfancontrol"
   cask "android-file-transfer"
   cask "transmit"
-  cask "secure-pipes"
+  # cask "secure-pipes"         # Removed: deprecated in homebrew (2026-09-01)
   cask "vnc-viewer"
 end
 
@@ -325,9 +325,9 @@ if gui
   cask "google-earth-pro"
   # cask "phantomjs"            # Removed: discontinued project, use headless Chrome/Playwright
   cask "multipass"
-  cask "mqtt-explorer"
+  # cask "mqtt-explorer"        # Removed: deprecated in homebrew (2026-09-01)
   # cask "nomad-menu"           # Removed: disabled in homebrew (2025-07-10)
-  cask "ubiquiti-unifi-controller"
+  # cask "ubiquiti-unifi-controller"  # Removed: deprecated (2026-09-01); see `unifi`
   cask "elgato-control-center"
   cask "elgato-stream-deck"
   cask "setapp"

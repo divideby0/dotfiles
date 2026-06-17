@@ -51,7 +51,7 @@
     "editor.defaultFormatter": "mbessey.vscode-rufo",
   },
   "[markdown]": {
-    "editor.defaultFormatter": "darkriszty.markdown-table-prettify",
+    "editor.defaultFormatter": "unifiedjs.vscode-remark",
   },
   "[dockercompose]": {
     "editor.insertSpaces": true,
@@ -194,26 +194,28 @@
     "*.s3db": "${capture}.${extname}-*"
   },
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#608c65",
-    "activityBar.background": "#608c65",
-    "activityBar.foreground": "#e7e7e7",
-    "activityBar.inactiveForeground": "#e7e7e799",
-    "activityBarBadge.background": "#524e71",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "commandCenter.border": "#e7e7e799",
-    "sash.hoverBorder": "#608c65",
-    "statusBar.background": "#4b6e4f",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBarItem.hoverBackground": "#608c65",
-    "statusBarItem.remoteBackground": "#4b6e4f",
-    "statusBarItem.remoteForeground": "#e7e7e7",
-    "titleBar.activeBackground": "#4b6e4f",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#4b6e4f99",
-    "titleBar.inactiveForeground": "#e7e7e799",
+    "activityBar.activeBackground": "#93e6fc",
+    "activityBar.background": "#93e6fc",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#fa45d4",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#93e6fc",
+    "statusBar.background": "#61dafb",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#2fcefa",
+    "statusBarItem.remoteBackground": "#61dafb",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#61dafb",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#61dafb99",
+    "titleBar.inactiveForeground": "#15202b99",
   },
-  "yaml.schemas": {
-    "file:///Users/cedric/.cursor/extensions/atlassian.atlascode-4.0.17-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+  "atlascode.jira.lastCreatePreSelectedValues": {
+    "siteId": "",
+    "projectKey": "",
+    "issueTypeId": "",
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
@@ -221,4 +223,10 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
+  "amazonQ.showCodeWithReferences": false,
+  "window.autoDetectColorScheme": false,
+  "cSpell.userWords": ["trifork", "webflow"],
+  "terminal.integrated.initialHint": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.colorTheme": "Monokai Night",
 }

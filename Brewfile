@@ -5,9 +5,9 @@ cask_args appdir: "/Applications"
 ###############################################################################
 # tap "ringohub/redis-cli"        # Removed: broken/outdated
 # tap "heroku/brew"               # Removed: heroku now in homebrew/core
-# tap "ankitpokhrel/jira-cli"     # Removed: jira-cli now in homebrew/core
+# tap "ankitpokhrel/jira-cli"     # Removed: no longer used
+# tap "cirruslabs/cli"            # Removed: no longer used (tart)
 # tap "tclass/cloud_sql_proxy"    # Removed: using cloud-sql-proxy v2 gcloud component
-tap "cirruslabs/cli"
 tap "ddev/ddev"
 tap "runpod/runpodctl"
 tap "withgraphite/tap"
@@ -119,7 +119,7 @@ brew "ctlptl"
 # Container Tools
 ###############################################################################
 brew "ddev/ddev/ddev"
-brew "cirruslabs/cli/tart"
+# brew "cirruslabs/cli/tart"           # Removed: no longer used
 
 ###############################################################################
 # Security & Misc
@@ -144,7 +144,7 @@ brew "antlr"
 brew "asciinema"
 brew "htop"
 brew "tldr"
-brew "jira-cli"
+# brew "jira-cli"                      # Removed: no longer used
 brew "heroku"
 brew "slackdump"
 brew "llm"

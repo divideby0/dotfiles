@@ -28,6 +28,17 @@ fi
 echo "Updating Homebrew..."
 brew update
 
+# Trust the third-party taps declared in the Brewfile. brew bundle refuses
+# to load formulae from untrusted taps, which breaks non-interactive
+# bootstrap (`brew trust` is a per-machine setting, not stored in the repo).
+echo "Trusting third-party taps..."
+grep -E '^[[:space:]]*tap "' "$DOTFILES_DIR/Brewfile" \
+    | sed -E 's/.*tap "([^"]+)".*/\1/' \
+    | while read -r t; do
+        brew tap "$t" >/dev/null 2>&1 || true
+        brew trust "$t" >/dev/null 2>&1 || true
+    done
+
 # Install from Brewfile. Select what to install with HOMEBREW_PROFILE
 # (personal|work|server); see the Brewfile header for group overrides.
 # e.g. HOMEBREW_PROFILE=work ./bootstrap.sh

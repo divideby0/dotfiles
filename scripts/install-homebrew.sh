@@ -28,8 +28,10 @@ fi
 echo "Updating Homebrew..."
 brew update
 
-# Install from Brewfile
-echo "Installing from Brewfile..."
+# Install from Brewfile. Select what to install with HOMEBREW_PROFILE
+# (personal|work|server); see the Brewfile header for group overrides.
+# e.g. HOMEBREW_PROFILE=work ./bootstrap.sh
+echo "Installing from Brewfile (profile: ${HOMEBREW_PROFILE:-personal})..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 echo "✓ Homebrew setup complete"

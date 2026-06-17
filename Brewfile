@@ -1,6 +1,38 @@
 cask_args appdir: "/Applications"
 
 ###############################################################################
+# Profiles
+#
+# Choose what gets installed with HOMEBREW_PROFILE (default: personal).
+# The HOMEBREW_ prefix is required: `brew bundle` scrubs all other env vars.
+#   HOMEBREW_PROFILE=personal   everything (default)
+#   HOMEBREW_PROFILE=work       dev + comms + cloud GUI apps; no media/creative
+#   HOMEBREW_PROFILE=server     CLI tools only; no GUI casks
+#
+# Force any group on/off regardless of profile (1/0):
+#   HOMEBREW_INCLUDE_GUI=0   HOMEBREW_INCLUDE_DEV=1   HOMEBREW_INCLUDE_AI=0
+#   HOMEBREW_INCLUDE_COMMS=1 HOMEBREW_INCLUDE_CLOUD=0 HOMEBREW_INCLUDE_MEDIA=1
+#   HOMEBREW_INCLUDE_CREATIVE=1
+#
+# CLI formulae are always installed; only cask groups are gated.
+###############################################################################
+profile = ENV.fetch("HOMEBREW_PROFILE", "personal").downcase
+
+def want?(group, default)
+  v = ENV["HOMEBREW_INCLUDE_#{group}"]
+  return %w[1 true yes on].include?(v.downcase) unless v.nil?
+  default
+end
+
+gui      = want?("GUI",      profile != "server")
+dev      = want?("DEV",      gui)
+ai       = want?("AI",       gui)
+comms    = want?("COMMS",    gui)
+cloud    = want?("CLOUD",    gui)
+media    = want?("MEDIA",    gui && profile == "personal")
+creative = want?("CREATIVE", gui && profile == "personal")
+
+###############################################################################
 # Taps
 ###############################################################################
 # tap "ringohub/redis-cli"        # Removed: broken/outdated
@@ -156,148 +188,168 @@ brew "graphviz"
 brew "pandoc-crossref"
 
 ###############################################################################
-# Casks - Essentials
+# Casks - Essentials                                          [gui]
 ###############################################################################
-cask "1password"
-cask "1password-cli"
-cask "google-chrome"
-cask "firefox"
-cask "brave-browser"
-cask "iterm2"
-cask "warp"
-cask "raycast"
-cask "rectangle"
-cask "bartender"
-cask "istat-menus"
-cask "cleanshot"
+if gui
+  cask "1password"
+  cask "1password-cli"
+  cask "google-chrome"
+  cask "firefox"
+  cask "brave-browser"
+  cask "iterm2"
+  cask "warp"
+  cask "raycast"
+  cask "rectangle"
+  cask "bartender"
+  cask "istat-menus"
+  cask "cleanshot"
+end
 
 ###############################################################################
-# Casks - Development
+# Casks - Development                                         [dev]
 ###############################################################################
-cask "visual-studio-code"
-cask "cursor"
-cask "docker-desktop"
-cask "intellij-idea"
-cask "goland"
-cask "pycharm"
-cask "datagrip"
-cask "dash"
-cask "postman"
-cask "postman-cli"
-cask "insomnia"
-cask "bruno"
-cask "charles"
-cask "ngrok"
-cask "sourcetree"
-cask "lens"
+if dev
+  cask "visual-studio-code"
+  cask "cursor"
+  cask "docker-desktop"
+  cask "intellij-idea"
+  cask "goland"
+  cask "pycharm"
+  cask "datagrip"
+  cask "dash"
+  cask "postman"
+  cask "postman-cli"
+  cask "insomnia"
+  cask "bruno"
+  cask "charles"
+  cask "ngrok"
+  cask "sourcetree"
+  cask "lens"
+end
 
 ###############################################################################
-# Casks - AI & Productivity
+# Casks - AI & Productivity                                   [ai]
 ###############################################################################
-cask "claude"
-cask "chatgpt"
-cask "boltai"
-cask "obsidian"
-cask "notion"
-cask "grammarly-desktop"
-cask "superhuman"
-cask "clickup"
-cask "miro"
+if ai
+  cask "claude"
+  cask "chatgpt"
+  cask "boltai"
+  cask "obsidian"
+  cask "notion"
+  cask "grammarly-desktop"
+  cask "superhuman"
+  cask "clickup"
+  cask "miro"
+end
 
 ###############################################################################
-# Casks - Communication
+# Casks - Communication                                       [comms]
 ###############################################################################
-cask "slack"
-cask "discord"
-cask "zoom"
-cask "microsoft-teams"
-cask "whatsapp"
-# cask "skype"                # Removed: Microsoft retired Skype (2025)
+if comms
+  cask "slack"
+  cask "discord"
+  cask "zoom"
+  cask "microsoft-teams"
+  cask "whatsapp"
+  # cask "skype"                # Removed: Microsoft retired Skype (2025)
+end
 
 ###############################################################################
-# Casks - Cloud & VPN
+# Casks - Cloud & VPN                                         [cloud]
 ###############################################################################
-cask "google-drive"
-cask "gcloud-cli"  # Keep in brew (mise version needs sudo)
-cask "expressvpn"
-cask "viscosity"
-cask "pritunl"
+if cloud
+  cask "google-drive"
+  cask "gcloud-cli"  # Keep in brew (mise version needs sudo)
+  cask "expressvpn"
+  cask "viscosity"
+  cask "pritunl"
+end
 
 ###############################################################################
-# Casks - Media
+# Casks - Media                                               [media]
 ###############################################################################
-cask "vlc"
-cask "iina"
-cask "spotify"
-cask "plex"
-cask "plex-media-server"
-cask "obs"
-cask "handbrake-app"
-cask "losslesscut"
-cask "audacity"
-cask "descript"
+if media
+  cask "vlc"
+  cask "iina"
+  cask "spotify"
+  cask "plex"
+  cask "plex-media-server"
+  cask "obs"
+  cask "handbrake-app"
+  cask "losslesscut"
+  cask "audacity"
+  cask "descript"
+end
 
 ###############################################################################
-# Casks - Creative
+# Casks - Creative                                            [creative]
 ###############################################################################
-cask "adobe-creative-cloud"
-cask "figma"
-cask "sketch"
-cask "blender"
-cask "ableton-live-suite"
-cask "splice"
-cask "native-access"
-cask "waves-central"
-cask "insta360-studio"
-cask "lrtimelapse"
+if creative
+  cask "adobe-creative-cloud"
+  cask "figma"
+  cask "sketch"
+  cask "blender"
+  cask "ableton-live-suite"
+  cask "splice"
+  cask "native-access"
+  cask "waves-central"
+  cask "insta360-studio"
+  cask "lrtimelapse"
+end
 
 ###############################################################################
-# Casks - Utilities
+# Casks - Utilities                                           [gui]
 ###############################################################################
-cask "betterzip"
-cask "rar"
-cask "caffeine"
-# cask "cheatsheet"           # Removed: disabled in homebrew (2025-11-09)
-cask "keyboard-cleaner"
-cask "smcfancontrol"
-cask "android-file-transfer"
-cask "transmit"
-cask "secure-pipes"
-cask "vnc-viewer"
+if gui
+  cask "betterzip"
+  cask "rar"
+  cask "caffeine"
+  # cask "cheatsheet"           # Removed: disabled in homebrew (2025-11-09)
+  cask "keyboard-cleaner"
+  cask "smcfancontrol"
+  cask "android-file-transfer"
+  cask "transmit"
+  cask "secure-pipes"
+  cask "vnc-viewer"
+end
 
 ###############################################################################
-# Casks - Other
+# Casks - Other                                               [gui]
 ###############################################################################
-# cask "kindle"               # Removed: cask gone; Kindle is Mac App Store only now
-cask "deckset"
-cask "camunda-modeler"
-cask "keybase"
-cask "tor-browser"
-cask "google-earth-pro"
-# cask "phantomjs"            # Removed: discontinued project, use headless Chrome/Playwright
-cask "multipass"
-cask "mqtt-explorer"
-# cask "nomad-menu"           # Removed: disabled in homebrew (2025-07-10)
-cask "ubiquiti-unifi-controller"
-cask "elgato-control-center"
-cask "elgato-stream-deck"
-cask "setapp"
-cask "microsoft-office"
-cask "xquartz"
-cask "macfuse"
-# cask "mactex"  # Large (~4GB), install manually: brew install --cask mactex
+if gui
+  # cask "kindle"               # Removed: cask gone; Kindle is Mac App Store only now
+  cask "deckset"
+  cask "camunda-modeler"
+  cask "keybase"
+  cask "tor-browser"
+  cask "google-earth-pro"
+  # cask "phantomjs"            # Removed: discontinued project, use headless Chrome/Playwright
+  cask "multipass"
+  cask "mqtt-explorer"
+  # cask "nomad-menu"           # Removed: disabled in homebrew (2025-07-10)
+  cask "ubiquiti-unifi-controller"
+  cask "elgato-control-center"
+  cask "elgato-stream-deck"
+  cask "setapp"
+  cask "microsoft-office"
+  cask "xquartz"
+  cask "macfuse"
+  # cask "mactex"  # Large (~4GB), install manually: brew install --cask mactex
+end
 
 ###############################################################################
-# Fonts
+# Fonts                                                       [gui]
 ###############################################################################
-cask "font-meslo-for-powerline"
-cask "font-fira-code-nerd-font"
+if gui
+  cask "font-meslo-for-powerline"
+  cask "font-fira-code-nerd-font"
+end
 
 ###############################################################################
 # NOTE: These tools are managed by mise, NOT brew:
 # - Languages: node, python, ruby, go, rust, java, deno, bun
 # - Package managers: pnpm, yarn, poetry, uv
-# - K8s: kubectl, helm, k9s, kops, kubie, kustomize, stern, krew, velero, skaffold
+# - K8s: kubectl, helm, k9s, kops, kubie, kustomize, stern, krew, skaffold
 # - Cloud: awscli, eksctl, gcloud (also in brew for bootstrap)
 # - Infra: terraform, terragrunt, sops, nomad, argo, pulumi
 # - Build: gradle, maven

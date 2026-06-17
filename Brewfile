@@ -112,7 +112,7 @@ brew "vercel-cli"
 # Kubernetes (tools not in mise)
 ###############################################################################
 brew "helm-docs"
-brew "ksync"
+# brew "ksync"                # Removed: disabled in homebrew (2025-08-03)
 brew "ctlptl"
 
 ###############################################################################
@@ -143,7 +143,7 @@ brew "antlr"
 ###############################################################################
 brew "asciinema"
 brew "htop"
-brew "tldr"
+brew "tlrc"                          # provides 'tldr' (replaces disabled tldr formula)
 # brew "jira-cli"                      # Removed: no longer used
 brew "heroku"
 brew "slackdump"
@@ -212,7 +212,7 @@ cask "discord"
 cask "zoom"
 cask "microsoft-teams"
 cask "whatsapp"
-cask "skype"
+# cask "skype"                # Removed: Microsoft retired Skype (2025)
 
 ###############################################################################
 # Casks - Cloud & VPN
@@ -257,7 +257,7 @@ cask "lrtimelapse"
 cask "betterzip"
 cask "rar"
 cask "caffeine"
-cask "cheatsheet"
+# cask "cheatsheet"           # Removed: disabled in homebrew (2025-11-09)
 cask "keyboard-cleaner"
 cask "smcfancontrol"
 cask "android-file-transfer"
@@ -268,16 +268,16 @@ cask "vnc-viewer"
 ###############################################################################
 # Casks - Other
 ###############################################################################
-cask "kindle"
+# cask "kindle"               # Removed: cask gone; Kindle is Mac App Store only now
 cask "deckset"
 cask "camunda-modeler"
 cask "keybase"
 cask "tor-browser"
 cask "google-earth-pro"
-cask "phantomjs"
+# cask "phantomjs"            # Removed: discontinued project, use headless Chrome/Playwright
 cask "multipass"
 cask "mqtt-explorer"
-cask "nomad-menu"
+# cask "nomad-menu"           # Removed: disabled in homebrew (2025-07-10)
 cask "ubiquiti-unifi-controller"
 cask "elgato-control-center"
 cask "elgato-stream-deck"

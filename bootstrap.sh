@@ -81,7 +81,7 @@ chmod +x "$DOTFILES_DIR/install.sh"
 # =============================================================================
 
 # Step 1: Package manager setup
-info "Step 1/6: Installing system packages..."
+info "Step 1/7: Installing system packages..."
 if [[ "$OS" == "macos" ]]; then
     "$DOTFILES_DIR/scripts/install-homebrew.sh"
 elif [[ "$OS" == "debian" ]]; then
@@ -96,31 +96,40 @@ fi
 echo ""
 
 # Step 2: Oh My Zsh
-info "Step 2/6: Installing Oh My Zsh..."
+info "Step 2/7: Installing Oh My Zsh..."
 "$DOTFILES_DIR/scripts/install-oh-my-zsh.sh"
 echo ""
 
 # Step 3: Symlinks
-info "Step 3/6: Creating symlinks..."
+info "Step 3/7: Creating symlinks..."
 "$DOTFILES_DIR/install.sh"
 echo ""
 
 # Step 4: mise
-info "Step 4/6: Installing mise and tools..."
+info "Step 4/7: Installing mise and tools..."
 "$DOTFILES_DIR/scripts/install-mise.sh"
 echo ""
 
 # Step 5: uv tools (Python)
-info "Step 5/6: Installing uv tools..."
+info "Step 5/7: Installing uv tools..."
 "$DOTFILES_DIR/scripts/install-uv-tools.sh"
 echo ""
 
-# Step 6: Claude Code (optional, skip on servers)
+# Step 6: gcloud components (macOS only - depends on the gcloud-cli cask)
+if [[ "$OS" == "macos" ]]; then
+    info "Step 6/7: Installing gcloud components..."
+    "$DOTFILES_DIR/scripts/install-gcloud-components.sh"
+else
+    info "Step 6/7: Skipping gcloud components (macOS only)"
+fi
+echo ""
+
+# Step 7: Claude Code (optional, skip on servers)
 if [[ "$OS" == "macos" ]] || [[ -n "$INSTALL_CLAUDE" ]]; then
-    info "Step 6/6: Installing Claude Code..."
+    info "Step 7/7: Installing Claude Code..."
     "$DOTFILES_DIR/scripts/install-claude-code.sh"
 else
-    info "Step 6/6: Skipping Claude Code (set INSTALL_CLAUDE=1 to install)"
+    info "Step 7/7: Skipping Claude Code (set INSTALL_CLAUDE=1 to install)"
 fi
 echo ""
 

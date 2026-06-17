@@ -3,13 +3,13 @@ cask_args appdir: "/Applications"
 ###############################################################################
 # Taps
 ###############################################################################
-tap "heroku/brew"
-# tap "ringohub/redis-cli"  # Removed: broken/outdated
-tap "ankitpokhrel/jira-cli"
+# tap "ringohub/redis-cli"        # Removed: broken/outdated
+# tap "heroku/brew"               # Removed: heroku now in homebrew/core
+# tap "ankitpokhrel/jira-cli"     # Removed: jira-cli now in homebrew/core
+# tap "tclass/cloud_sql_proxy"    # Removed: cloud-sql-proxy (v2) now in homebrew/core
 tap "cirruslabs/cli"
 tap "ddev/ddev"
 tap "runpod/runpodctl"
-tap "tclass/cloud_sql_proxy"
 tap "withgraphite/tap"
 
 ###############################################################################
@@ -104,7 +104,7 @@ brew "teleport"
 brew "velero"
 brew "supabase"
 brew "runpod/runpodctl/runpodctl"
-brew "tclass/cloud_sql_proxy/cloud_sql_proxy"
+brew "cloud-sql-proxy"               # v2 from core; flags differ from old v1
 brew "vercel-cli"
 
 ###############################################################################
@@ -143,8 +143,8 @@ brew "antlr"
 brew "asciinema"
 brew "htop"
 brew "tldr"
-brew "ankitpokhrel/jira-cli/jira-cli"
-brew "heroku/brew/heroku"
+brew "jira-cli"
+brew "heroku"
 brew "slackdump"
 brew "llm"
 brew "mosquitto"

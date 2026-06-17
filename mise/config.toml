@@ -15,7 +15,7 @@ trusted_config_paths = ["~"]
 [tools]
 argo = "3.5.12"
 aws-iam-authenticator = "0.6.27"
-awscli = { version = "2.33.20", symlink_bins = "true" }
+awscli = { version = "latest", symlink_bins = "true" }
 bun = "1.2.23"
 deno = "2.0.5"
 doctl = "1.148.0"

@@ -85,7 +85,7 @@ brew "imagemagick"
 brew "graphicsmagick"
 brew "exiftool"
 brew "sox"
-brew "youtube-dl"
+brew "yt-dlp"
 
 ###############################################################################
 # Database Tools

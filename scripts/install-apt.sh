@@ -12,8 +12,18 @@ echo "=== APT Package Setup ==="
 # Install packages from list
 if [[ -f "$DOTFILES_DIR/packages/apt.txt" ]]; then
     echo "Installing packages from apt.txt..."
-    # Filter out comments and empty lines
-    grep -v '^#' "$DOTFILES_DIR/packages/apt.txt" | grep -v '^$' | xargs sudo apt-get install -y
+    # Filter out comments and empty lines, then drop anything this release
+    # does not carry: one unknown name makes apt-get abort the whole install
+    # (zsh-completions, for one, is not packaged on Ubuntu 26.04).
+    available=()
+    for pkg in $(grep -v '^#' "$DOTFILES_DIR/packages/apt.txt" | grep -v '^$'); do
+        if apt-cache show "$pkg" &>/dev/null; then
+            available+=("$pkg")
+        else
+            echo "Skipping $pkg: not available in this release"
+        fi
+    done
+    sudo apt-get install -y "${available[@]}"
 else
     echo "No apt.txt found, installing essentials..."
     sudo apt-get install -y \

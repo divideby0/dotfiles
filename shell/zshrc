@@ -152,6 +152,7 @@ _comp_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh-completions"
 # Define lazy completion loader
 _lazy_load_completion() {
   local cmd=$1
+  shift  # "$@" below must be the user's args, not the command name again
   local cache_file="$_comp_cache/_$cmd"
 
   # Unset the stub function

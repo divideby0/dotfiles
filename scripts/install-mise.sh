@@ -47,24 +47,12 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
     fi
 fi
 
-# Install all tools from tool-versions
-echo "Installing tools from .tool-versions..."
+# Install the global tool set. The [tools] table in mise/config.toml, which
+# install.sh links as ~/.config/mise/config.toml, already IS the set of
+# global defaults — no `mise use -g` pass is needed. (One used to re-pin every
+# line of tool-versions here, and because the global config is a symlink
+# into this repo, it rewrote config.toml with tool-versions' older pins.)
+echo "Installing mise tools..."
 mise install
-
-# Set global defaults
-echo "Setting global tool versions..."
-cd "$DOTFILES_DIR/mise"
-while IFS= read -r line; do
-    # Skip comments and empty lines
-    [[ "$line" =~ ^#.*$ ]] && continue
-    [[ -z "$line" ]] && continue
-
-    tool=$(echo "$line" | awk '{print $1}')
-    version=$(echo "$line" | awk '{print $2}')
-
-    if [[ -n "$tool" && -n "$version" ]]; then
-        mise use -g "$tool@$version" 2>/dev/null || true
-    fi
-done < tool-versions
 
 echo "✓ mise setup complete"

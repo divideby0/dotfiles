@@ -7,6 +7,7 @@
 set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DOTFILES_DIR/scripts/lib/detect-os.sh"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 # Colors for output
@@ -109,8 +110,13 @@ fi
 info "Installing mise configuration..."
 
 mkdir -p "$HOME/.config/mise"
-link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
-link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
+if is_synology; then
+    # NAS gets a lean CLI toolset, not the full language/k8s/cloud stack
+    link_file "$DOTFILES_DIR/mise/config.server.toml" "$HOME/.config/mise/config.toml"
+else
+    link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
+    link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
+fi
 
 # =============================================================================
 # Misc configuration
@@ -166,9 +172,9 @@ check_tool() {
     fi
 }
 
-check_tool "brew" "Install from https://brew.sh"
-check_tool "starship" "Install with: brew install starship"
-check_tool "mise" "Install with: brew install mise"
+is_macos && check_tool "brew" "Install from https://brew.sh"
+check_tool "starship" "Install with: mise install starship"
+check_tool "mise" "Install with: curl https://mise.run | sh"
 
 # Check if local config files should be created
 if [[ ! -f "$HOME/.gitconfig.local" ]]; then

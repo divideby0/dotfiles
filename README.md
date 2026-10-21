@@ -17,6 +17,7 @@ cd ~/src/divideby0/dotfiles
 ```
 
 The bootstrap script will:
+
 1. Install Rosetta (Apple Silicon)
 2. Install Homebrew and all packages from Brewfile
 3. Install Oh My Zsh
@@ -24,6 +25,27 @@ The bootstrap script will:
 5. Install mise and all language runtimes
 6. Install Python tools via uv (ansible, etc.)
 7. Install standalone tools (Claude Code, etc.)
+
+## Synology NAS Setup
+
+DSM has no apt/snap/brew; system packages come from
+[Entware](https://github.com/Entware/Entware/wiki/Install-on-Synology-NAS)
+(`opkg`, installed under `/opt`), which must be set up first.
+
+```bash
+git clone https://github.com/divideby0/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./bootstrap.sh
+```
+
+On Synology the bootstrap differs:
+
+- System packages from `packages/entware.txt` (zsh, git-lfs, ripgrep, fzf, ...)
+- mise links `mise/config.server.toml`, a lean CLI set (starship, eza, bat,
+  gh, just, uv, zellij), instead of the full workstation stack
+- DSM has no `chsh` and resets `/etc/passwd`, so `~/.profile` execs zsh for
+  interactive logins (`scripts/setup-synology-shell.sh`); scp/sftp/rsync and
+  `ssh host cmd` are unaffected
 
 ## What's Included
 
@@ -43,12 +65,15 @@ The bootstrap script will:
 ### Development Tools
 
 Languages managed by mise:
+
 - Node.js, Python, Ruby, Go, Rust, Java, Deno, Bun
 
 Kubernetes tools:
+
 - kubectl, helm, k9s, kops, kubie, kind, tilt, skaffold
 
 Infrastructure:
+
 - Terraform, Terragrunt, Pulumi, Ansible
 
 ### Editors

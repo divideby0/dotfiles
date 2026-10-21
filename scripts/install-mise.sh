@@ -6,6 +6,7 @@
 set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "$DOTFILES_DIR/scripts/lib/detect-os.sh"
 
 echo "=== mise Setup ==="
 
@@ -37,7 +38,7 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
         else
             echo ""
             echo "GitHub authentication recommended to avoid rate limits."
-            read -p "Authenticate now? [y/N] " -n 1 -r
+            read -p "Authenticate now? [y/N] " -n 1 -r || REPLY=n
             echo ""
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 gh auth login
@@ -50,6 +51,12 @@ fi
 # Install all tools from tool-versions
 echo "Installing tools from .tool-versions..."
 mise install
+
+# Synology uses the lean config.server.toml as-is; skip tool-versions pinning
+if is_synology; then
+    echo "✓ mise setup complete"
+    exit 0
+fi
 
 # Set global defaults
 echo "Setting global tool versions..."

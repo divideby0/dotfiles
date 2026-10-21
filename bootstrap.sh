@@ -103,7 +103,7 @@ elif [[ "$OS" == "debian" ]]; then
 elif [[ "$OS" == "redhat" ]]; then
     "$DOTFILES_DIR/scripts/install-yum.sh"
 elif [[ "$OS" == "synology" ]]; then
-    warn "Synology detected - skipping system packages (limited support)"
+    "$DOTFILES_DIR/scripts/install-entware.sh"
 else
     warn "Unknown OS - skipping system packages"
 fi
@@ -117,6 +117,8 @@ echo ""
 # Step 3: Symlinks
 info "Step 3/8: Creating symlinks..."
 "$DOTFILES_DIR/install.sh"
+# DSM resets login shells in /etc/passwd, so hand off to zsh from ~/.profile
+[[ "$OS" == "synology" ]] && "$DOTFILES_DIR/scripts/setup-synology-shell.sh"
 echo ""
 
 # Step 4: mise

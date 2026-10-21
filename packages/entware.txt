@@ -1,0 +1,30 @@
+# Core CLI tools for Synology DSM via Entware (opkg)
+# Install with: grep -v '^#' entware.txt | xargs sudo /opt/bin/opkg install
+# Entware itself must already be installed: https://github.com/Entware/Entware/wiki
+
+# Shell
+zsh
+
+# Version control
+git
+git-http
+git-lfs
+
+# Search & files
+ripgrep
+fzf
+fd
+tree
+less
+
+# Network
+socat
+
+# Utilities
+tmux
+screen
+lsof
+p7zip
+
+# Note: DSM already ships curl, wget, jq, htop, vim
+# Note: bat, gh, starship, eza, etc. come from mise (mise/config.server.toml)

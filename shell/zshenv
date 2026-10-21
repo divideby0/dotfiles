@@ -1,5 +1,8 @@
 # zshenv - loaded for all shell types (interactive, login, scripts)
 # Keep this minimal - only environment variables needed everywhere
 
+# Synology: Entware packages (zsh, git, tmux, ...) live in /opt
+[[ -f /etc/synoinfo.conf && -d /opt/bin ]] && export PATH="/opt/bin:/opt/sbin:/opt/usr/bin:$PATH"
+
 # uv/ruff and other tools installed to ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"

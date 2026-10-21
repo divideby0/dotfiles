@@ -69,10 +69,14 @@ setopt SHARE_HISTORY            # Share history between all sessions
 typeset -U PATH
 
 # Preferred editor for local and remote sessions
-export EDITOR=$([[ -n $SSH_CONNECTION ]] && echo 'nano' || echo 'cursor')
+if [[ -n $SSH_CONNECTION ]] || ! command -v cursor &>/dev/null; then
+    export EDITOR='nano'
+else
+    export EDITOR='cursor'
+fi
 
-# Architecture flag
-export ARCHFLAGS="-arch arm64"
+# Architecture flag (macOS compilers only)
+[[ "$OS" == "Darwin" ]] && export ARCHFLAGS="-arch $ARCH"
 
 # Kubernetes config
 export KUBECONFIG="$HOME/.kube/config"
@@ -110,7 +114,8 @@ driut() { docker rmi $(docker images -q --filter "dangling=true") }
 
 # Core aliases
 alias kp='kill-port'
-alias ls="ls -g"
+# BSD `ls -g` is a no-op; GNU `ls -g` means long listing without owner
+[[ "$OS" == "Darwin" ]] && alias ls="ls -g"
 alias zshconfig="$EDITOR ~/.zshrc"
 
 # Claude Code
@@ -207,9 +212,11 @@ fi
 # =============================================================================
 # Starship prompt (must be last)
 # =============================================================================
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/cedric/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
+if [[ -d "$HOME/.docker/completions" ]]; then
+    fpath=("$HOME/.docker/completions" $fpath)
+    autoload -Uz compinit
+    compinit
+fi
 # End of Docker CLI completions

@@ -48,9 +48,11 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
     fi
 fi
 
-# Install all tools from tool-versions
-echo "Installing tools from .tool-versions..."
-mise install
+# Install all tools from the global config. Run from $HOME: mise also reads
+# ./mise/config.toml, so running from the repo root would pull in the full
+# workstation config even where a lean one is linked (e.g. Synology).
+echo "Installing tools from global mise config..."
+(cd "$HOME" && mise install)
 
 # Synology uses the lean config.server.toml as-is; skip tool-versions pinning
 if is_synology; then

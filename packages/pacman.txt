@@ -38,3 +38,28 @@ screen
 unzip
 zip
 7zip
+
+# Essentials from the Brewfile's CLI formulae that the Arch repositories
+# carry. Left out: macOS-only shims, daemons (caddy, mosquitto, tor), and
+# vendor CLIs that need the AUR. tealdeer conflicts with Omarchy's tldr;
+# pandoc-cli pulls about 230 Haskell packages, so it is not an essential.
+vim
+nano
+lsof
+pv
+cloc
+diffstat
+jdupes
+watchexec
+pbzip2
+aria2
+iperf3
+tcpdump
+wireguard-tools
+perl-image-exiftool
+sox
+git-filter-repo
+expect
+asciinema
+postgresql
+testdisk

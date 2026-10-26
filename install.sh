@@ -132,8 +132,18 @@ fi
 info "Installing mise configuration..."
 
 mkdir -p "$HOME/.config/mise"
-link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
-link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"le "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
+if [[ -f "$OMARCHY_ZSH" ]]; then
+    # Omarchy's ~/.local/bin wrappers (claude, codex, gh, ...) run
+    # `mise use -g <tool>` on first use, which writes ~/.config/mise/config.toml.
+    # Linked from here, that would rewrite this repo's config.toml. mise also
+    # reads ~/.config/mise/conf.d/*.toml as global config, and `mise use -g`
+    # never writes there, so the repo's tools load from conf.d instead.
+    # ~/.tool-versions is skipped: config.toml is the source of truth.
+    mkdir -p "$HOME/.config/mise/conf.d"
+    link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/conf.d/dotfiles.toml"
+else
+    link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
+    link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
 fi
 
 # =============================================================================

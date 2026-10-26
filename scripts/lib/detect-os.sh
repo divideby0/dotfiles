@@ -22,9 +22,15 @@ detect_os() {
                     alpine)
                         echo "alpine"
                         ;;
+                    arch|omarchy|endeavouros|manjaro)
+                        echo "arch"
+                        ;;
                     *)
+                        # Derivatives that name Arch as their parent
+                        if [[ " ${ID_LIKE:-} " == *" arch "* ]]; then
+                            echo "arch"
                         # Check for Synology
-                        if [[ -f /etc/synoinfo.conf ]]; then
+                        elif [[ -f /etc/synoinfo.conf ]]; then
                             echo "synology"
                         else
                             echo "linux"
@@ -91,6 +97,11 @@ pkg_install() {
             ;;
         alpine)
             sudo apk add "$@"
+            ;;
+        arch)
+            # --needed skips what is already current. No -y: refreshing the
+            # sync database without a full upgrade is a partial upgrade.
+            sudo pacman -S --needed --noconfirm "$@"
             ;;
         synology)
             # Synology uses opkg if available

@@ -67,6 +67,10 @@ elif [[ "$OS" == "debian" ]]; then
 elif [[ "$OS" == "redhat" ]]; then
     info "Updating yum package lists..."
     sudo yum check-update || true
+elif [[ "$OS" == "arch" ]]; then
+    # Deliberately no `pacman -Sy`: a database refresh without a full upgrade
+    # is a partial upgrade. install-pacman.sh says what to do on a 404.
+    info "Arch Linux: installing from the current pacman database"
 fi
 
 # =============================================================================
@@ -102,6 +106,8 @@ elif [[ "$OS" == "debian" ]]; then
     "$DOTFILES_DIR/scripts/install-apt.sh"
 elif [[ "$OS" == "redhat" ]]; then
     "$DOTFILES_DIR/scripts/install-yum.sh"
+elif [[ "$OS" == "arch" ]]; then
+    "$DOTFILES_DIR/scripts/install-pacman.sh"
 elif [[ "$OS" == "synology" ]]; then
     warn "Synology detected - skipping system packages (limited support)"
 else

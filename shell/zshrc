@@ -1,5 +1,12 @@
+# Omarchy (omarchy-zsh) sources this file after its own shell defaults, which
+# already initialise mise, Starship, zoxide and fzf; the guards below skip
+# those so they run once. See install.sh.
+_dotfiles_on_omarchy=0
+[[ -f /usr/share/omarchy-zsh/shell/all ]] && _dotfiles_on_omarchy=1
+
 # Terminal and Oh My Zsh settings
-export TERM="xterm-256color"
+# macOS only: Linux terminals (foot, Ghostty, Alacritty) set their own TERM
+[[ "$OSTYPE" == darwin* ]] && export TERM="xterm-256color"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 
@@ -43,7 +50,7 @@ export ZSH_DISABLE_COMPFIX="true"
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # mise - version manager (using shims for faster startup, no per-prompt hook)
-command -v mise &>/dev/null && eval "$(mise activate zsh --shims)"
+(( ! _dotfiles_on_omarchy )) && command -v mise &>/dev/null && eval "$(mise activate zsh --shims)"
 
 # Google Cloud SDK completion (lazy load) - macOS only
 if [[ "$OS" == "Darwin" ]]; then
@@ -69,10 +76,18 @@ setopt SHARE_HISTORY            # Share history between all sessions
 typeset -U PATH
 
 # Preferred editor for local and remote sessions
-export EDITOR=$([[ -n $SSH_CONNECTION ]] && echo 'nano' || echo 'cursor')
+# (Cursor on macOS as before; on Linux only where it is installed, otherwise
+# the system's editor stays, e.g. nvim on Omarchy)
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR=nano
+elif [[ "$OSTYPE" == darwin* ]] || command -v cursor &>/dev/null; then
+  export EDITOR=cursor
+else
+  export EDITOR="${EDITOR:-nvim}"
+fi
 
 # Architecture flag
-export ARCHFLAGS="-arch arm64"
+[[ "$OSTYPE" == darwin* ]] && export ARCHFLAGS="-arch arm64"
 
 # Kubernetes config
 export KUBECONFIG="$HOME/.kube/config"
@@ -110,7 +125,19 @@ driut() { docker rmi $(docker images -q --filter "dangling=true") }
 
 # Core aliases
 alias kp='kill-port'
-alias ls="ls -g"
+# ls through eza where it is installed (mise on macOS, a package on Omarchy),
+# with Omarchy's own definitions. This comes after Oh My Zsh, whose ls-flag
+# aliases lt, la and lsr do not parse under eza (its -F and -t take values).
+if command -v eza &>/dev/null; then
+  alias ls='eza -lh --group-directories-first --icons=auto'
+  alias lsa='ls -a'
+  alias lt='eza --tree --level=2 --long --icons --git'
+  alias lta='lt -a'
+  alias la='ls -a'
+  alias lsr='ls -R'
+else
+  alias ls="ls -g"
+fi
 alias zshconfig="$EDITOR ~/.zshrc"
 
 # Claude Code
@@ -208,7 +235,7 @@ fi
 # =============================================================================
 # Starship prompt (must be last)
 # =============================================================================
-eval "$(starship init zsh)"
+(( ! _dotfiles_on_omarchy )) && eval "$(starship init zsh)"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/cedric/.docker/completions $fpath)
 autoload -Uz compinit

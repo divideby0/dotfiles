@@ -1,0 +1,40 @@
+# Arch Linux / Omarchy packages (pacman)
+# The Arch names for packages/apt.txt. Omarchy already ships most of them;
+# install-pacman.sh skips anything that is current (--needed).
+
+# Shell
+zsh
+zsh-completions
+
+# Version control
+git
+git-lfs
+github-cli
+
+# Search and file tools
+ripgrep
+jq
+tree
+fzf
+fd
+
+# Network
+curl
+wget
+httpie
+socat
+
+# Build tools
+base-devel
+make
+autoconf
+
+# System tools
+htop
+tmux
+screen
+
+# Archives
+unzip
+zip
+7zip

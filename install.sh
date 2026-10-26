@@ -60,7 +60,30 @@ echo ""
 # =============================================================================
 info "Installing shell configuration..."
 
-link_file "$DOTFILES_DIR/shell/zshrc" "$HOME/.zshrc"
+# Omarchy (omarchy-zsh) owns ~/.zshrc: it loads Omarchy's shell defaults, and
+# this repo's zshrc is layered on top by one source line, so Omarchy's base
+# stays and these settings win where they overlap. Everywhere else the
+# zshrc is linked as before.
+OMARCHY_ZSH=/usr/share/omarchy-zsh/shell/all
+ZSHRC_SOURCE_LINE="[[ -f \"$DOTFILES_DIR/shell/zshrc\" ]] && source \"$DOTFILES_DIR/shell/zshrc\"  # dotfiles"
+if [[ -f "$OMARCHY_ZSH" ]]; then
+    # A ~/.zshrc linked here by an older run would make the append below
+    # write into this repo: put Omarchy's own template back first.
+    if [[ -L "$HOME/.zshrc" ]] && [[ "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR"/* ]]; then
+        rm "$HOME/.zshrc"
+    fi
+    if [[ ! -f "$HOME/.zshrc" ]] && [[ -f /usr/share/omarchy-zsh/templates/zshrc ]]; then
+        cp /usr/share/omarchy-zsh/templates/zshrc "$HOME/.zshrc"
+    fi
+    if grep -qF "$DOTFILES_DIR/shell/zshrc" "$HOME/.zshrc" 2>/dev/null; then
+        success "Already layered: ~/.zshrc sources the dotfiles zshrc"
+    else
+        printf '\n# Layered by divideby0/dotfiles install.sh, after Omarchy'"'"'s defaults\n%s\n' "$ZSHRC_SOURCE_LINE" >> "$HOME/.zshrc"
+        success "Layered the dotfiles zshrc on top of Omarchy's ~/.zshrc"
+    fi
+else
+    link_file "$DOTFILES_DIR/shell/zshrc" "$HOME/.zshrc"
+fi
 link_file "$DOTFILES_DIR/shell/zshenv" "$HOME/.zshenv"
 link_file "$DOTFILES_DIR/shell/zprofile" "$HOME/.zprofile"
 
@@ -110,7 +133,8 @@ info "Installing mise configuration..."
 
 mkdir -p "$HOME/.config/mise"
 link_file "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
-link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
+link_file "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"le "$DOTFILES_DIR/mise/tool-versions" "$HOME/.tool-versions"
+fi
 
 # =============================================================================
 # Misc configuration

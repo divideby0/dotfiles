@@ -38,6 +38,12 @@ link_file() {
     local src="$1"
     local dst="$2"
 
+    # Already right: leave it, so a re-run changes nothing and says so.
+    if [[ -L "$dst" && "$(readlink "$dst")" == "$src" ]]; then
+        info "Already linked $dst"
+        return
+    fi
+
     backup_if_exists "$dst"
 
     # Create parent directory if needed

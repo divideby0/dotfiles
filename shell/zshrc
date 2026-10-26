@@ -125,7 +125,19 @@ driut() { docker rmi $(docker images -q --filter "dangling=true") }
 
 # Core aliases
 alias kp='kill-port'
-alias ls="ls -g"
+# ls through eza where it is installed (mise on macOS, a package on Omarchy),
+# with Omarchy's own definitions. This comes after Oh My Zsh, whose ls-flag
+# aliases lt, la and lsr do not parse under eza (its -F and -t take values).
+if command -v eza &>/dev/null; then
+  alias ls='eza -lh --group-directories-first --icons=auto'
+  alias lsa='ls -a'
+  alias lt='eza --tree --level=2 --long --icons --git'
+  alias lta='lt -a'
+  alias la='ls -a'
+  alias lsr='ls -R'
+else
+  alias ls="ls -g"
+fi
 alias zshconfig="$EDITOR ~/.zshrc"
 
 # Claude Code
